@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS suppliers (
+  "id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  "name" TEXT NOT NULL,
+  "state" TEXT NOT NULL,
+  "minimumKwh" NUMERIC NOT NULL,
+  "costPerKwh" NUMERIC(10,2) NOT NULL,
+  "totalCustomers" NUMERIC NOT NULL,
+  "averageRating" NUMERIC NOT NULL,
+  "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updateAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
