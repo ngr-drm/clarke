@@ -6,7 +6,7 @@
 	"scripts": {
 		"format": "pnpm biome format ./src",
 		"lint": "biome lint --error-on-warnings ./src",
-		"migrations": "node -r ts-node/register --env-file .env ./src/plug-ins/pg-db/migrate.ts",
+		"migrations": "node -r ts-node/register --env-file .env ./src/providers/pg-db/migrate.ts",
 		"build": "tsc -b",
 		"build:watch": "tsc -w",
 		"dev": "npx concurrently \"npm run build\" \"npm run dev:run\"",
