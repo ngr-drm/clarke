@@ -6,6 +6,6 @@
     "outDir": "./dist",
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "src/plug-ins/axios/.ts"],
+  "include": ["src/**/*", "src/providers/axios/.ts"],
   "exclude": ["**/*.spec.ts"]
 }

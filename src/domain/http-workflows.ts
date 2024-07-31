@@ -1,24 +1,32 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { findSuppliers, saveSuppliers } from './domain/activities';
-import type { Energy, Supplier } from './domain/aggregate-root/values-objects';
+import { ZodError } from 'zod';
+import { findSuppliers, saveSuppliers } from '../domain/activities';
+import { energyValidator, supplierValidator } from '../domain/aggregate-root/values-objects';
 
 async function routes(fastify: any) {
+  fastify.get('/health', async (request: FastifyRequest, reply: FastifyReply) => {
+    reply.code(200).send({ api: 'running...' });
+  });
+
   fastify.post('/supplier/create', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const payload = request.body as Supplier;
+      const payload = supplierValidator.parse(request.body);
       const supplier = await saveSuppliers(payload);
 
       reply.log.info('supplier saved successfully...');
       return reply.code(201).send(supplier);
     } catch (error) {
       reply.log.error(error);
+      if (error instanceof ZodError) {
+        return reply.code(400).send({ message: error });
+      }
       return reply.code(500).send({ message: 'internal server error...' });
     }
   });
 
   fastify.post('/supplier/list', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const payload = request.body as Energy;
+      const payload = energyValidator.parse(request.body);
       const suppliers = await findSuppliers(payload.monthlyConsumption);
 
       if (!suppliers.length) {
@@ -29,6 +37,9 @@ async function routes(fastify: any) {
       return reply.code(200).send(suppliers);
     } catch (error) {
       reply.log.error(error);
+      if (error instanceof ZodError) {
+        return reply.code(400).send({ message: error });
+      }
       return reply.code(500).send({ message: 'internal server error...' });
     }
   });
