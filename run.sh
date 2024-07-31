@@ -8,6 +8,6 @@ wait $PID
 
 echo "starting dev server..."
 
-pnpm run dev:watch & PID=$!
+pnpm run dev & PID=$!
 
 wait $PID

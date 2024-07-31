@@ -9,9 +9,9 @@
 		"migrations": "node -r ts-node/register --env-file .env ./src/providers/pg-db/migrate.ts",
 		"build": "tsc -b",
 		"build:watch": "tsc -w",
+		"dev:run": "npx nodemon --env-file .env dist/index.js",
 		"dev": "npx concurrently \"npm run build\" \"npm run dev:run\"",
 		"dev:watch": "npx concurrently \"npm run build:watch\" \"npm run dev:run\"",
-		"dev:run": "npx nodemon --env-file .env dist/index.js",
 		"test": "jest",
 		"start": "node dist/index.js"
 	},
