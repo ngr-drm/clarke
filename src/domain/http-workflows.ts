@@ -47,7 +47,6 @@ async function routes(fastify: any) {
   fastify.post('/supplier/avatar', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const data = await request.file();
-      console.log(data);
       await uploadFile(data);
 
       reply.log.info('file uploaded successfully...');

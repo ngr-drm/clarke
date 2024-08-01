@@ -33,7 +33,6 @@ export const respository: Persistence = {
     };
     try {
       const res = await client.query(query);
-
       return res.rows;
     } catch (err) {
       throw new Error(`${err}`);
