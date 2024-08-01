@@ -27,14 +27,14 @@ export const respository: Persistence = {
 
   async findAll(minimumKwh: number) {
     const client = await dbConn();
-
     const query = {
-      text: `SELECT * FROM suppliers WHERE "minimumKwh" > $1`,
+      text: `SELECT * FROM suppliers WHERE "minimumKwh" < $1`,
       values: [minimumKwh],
     };
     try {
       const res = await client.query(query);
-      return res.rows[0];
+
+      return res.rows;
     } catch (err) {
       throw new Error(`${err}`);
     } finally {
