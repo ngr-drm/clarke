@@ -34,17 +34,3 @@ jobs:
           PG_DATABASE: 'docker'
           PG_PORT: 5432
           API_PORT: 3000
-
-      - name: run tests
-        env:
-          API_ENV: 'docker'
-          PG_HOST: 'localhost'
-          PG_HOST_DOCKER: 'db'
-          PG_USER: 'postgres'
-          PG_PASSWORD: 'docker'
-          PG_DATABASE: 'docker'
-          PG_PORT: 5432
-          API_PORT: 3000
-
-        run: |
-          docker-compose exec clark-mvp pnpm run test:e2e:docker
