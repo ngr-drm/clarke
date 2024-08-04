@@ -25,15 +25,6 @@ jobs:
           compose-file: './docker-compose.yml'
           up-flags: '-d --build'
           down-flags: '-v'
-        env:
-          API_ENV: 'docker'
-          PG_HOST: 'db'
-          PG_USER: 'docker'
-          PG_PASSWORD: 'docker'
-          PG_DATABASE: 'docker'
-          PG_PORT: 5432
-          PG_DOCKER_PORT: 5432
-          API_PORT: 3000
 
       - name: start containers
         run: docker-compose up
