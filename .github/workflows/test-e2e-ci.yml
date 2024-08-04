@@ -36,4 +36,4 @@ jobs:
           API_PORT: 3000
 
       - name: run tests
-        run: docker compose exec pnpm run test:e2e
+        run: docker compose exec pnpm run test:e2e:docker
