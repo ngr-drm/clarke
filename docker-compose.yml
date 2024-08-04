@@ -21,7 +21,7 @@ services:
     build: ./
     env_file:
       - path: ./.env
-        required: false
+        required: true
       - path: ./.env.docker
         required: true
     environment:
