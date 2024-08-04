@@ -30,9 +30,4 @@ then
   wait $PID
   echo "running sandbox server..."
   pnpm run start 
-
-
 fi
-
-
-\
