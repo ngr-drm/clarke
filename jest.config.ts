@@ -5,6 +5,7 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   setupFiles: ['dotenv/config'],
+  rootDir: 'src/',
 };
 
 export default config;

@@ -1,13 +1,21 @@
 #!/bin/bash
 
-echo "starting migrations..."
+echo "running migrations..."
 
 pnpm run migrations & PID=$!
 
 wait $PID
 
-echo "starting dev server..."
+echo "validating enviroment..."
 
-pnpm run dev & PID=$!
+if [ $API_ENV == "local" ] 
+then
+  echo "running local server..."
+  pnpm run dev:watch & PID=$!
+  wait $PID
+else
+  echo "running sandbox server..."
+  pnpm run start & PID=$!
+  wait $PID
+fi
 
-wait $PID

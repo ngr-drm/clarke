@@ -3,7 +3,7 @@ import path from 'node:path';
 import { pgPool } from './connector';
 
 (async function migrate() {
-  const client = await pgPool().connect();
+  const dbConn = await pgPool().connect();
   try {
     const pathWithSqlFiles = path.join(__dirname, '/migrations');
     const fileNames = fs
@@ -11,19 +11,19 @@ import { pgPool } from './connector';
       .filter((item) => !item.isDirectory() && item.name.toLowerCase().endsWith('.sql'))
       .map((item) => item.name);
 
-    await client.query('BEGIN');
+    await dbConn.query('BEGIN');
     for (const fileName of fileNames) {
       const sql = fs.readFileSync(`${pathWithSqlFiles}/${fileName}`, 'utf8');
-      await client.query(sql);
+      await dbConn.query(sql);
     }
 
-    await client.query('COMMIT');
+    await dbConn.query('COMMIT');
 
     console.info('migration done!');
   } catch (error) {
-    await client.query('ROLLBACK');
+    await dbConn.query('ROLLBACK');
     console.error('migration failed: ', error);
   } finally {
-    client.release(true);
+    dbConn.release(true);
   }
 })();

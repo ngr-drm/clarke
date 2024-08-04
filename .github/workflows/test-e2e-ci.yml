@@ -1,0 +1,30 @@
+name: test-e2e-ci
+
+on:
+  push:
+    branches:
+      - main
+      - features/**
+      - dependabot/**
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+
+      - name: start containers
+        run: docker-compose -f "docker-compose.yml" up -d --build
+
+      - name: run tests
+        run: pnpm run test:e2e
+
+      - name: stop containers
+        if: always()
+        run: docker-compose -f "docker-compose.yml" down

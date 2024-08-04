@@ -5,7 +5,12 @@ import { energyValidator, supplierValidator } from '../domain/aggregate-root/val
 
 async function routes(fastify: any) {
   fastify.get('/health', async (request: FastifyRequest, reply: FastifyReply) => {
-    reply.code(200).send({ api: 'running...' });
+    try {
+      reply.code(200).send({ api: 'running...' });
+    } catch (err) {
+      reply.log.error(err);
+      return reply.code(500).send({ message: 'internal server error...' });
+    }
   });
 
   fastify.post('/supplier/create', async (request: FastifyRequest, reply: FastifyReply) => {
@@ -15,10 +20,10 @@ async function routes(fastify: any) {
 
       reply.log.info('supplier saved successfully...');
       return reply.code(201).send(supplier);
-    } catch (error) {
-      reply.log.error(error);
-      if (error instanceof ZodError) {
-        return reply.code(400).send({ message: error });
+    } catch (err) {
+      reply.log.error(err);
+      if (err instanceof ZodError) {
+        return reply.code(400).send({ message: err });
       }
       return reply.code(500).send({ message: 'internal server error...' });
     }
@@ -35,10 +40,10 @@ async function routes(fastify: any) {
       }
       reply.log.info('supplier saved successfully...');
       return reply.code(200).send(suppliers);
-    } catch (error) {
-      reply.log.error(error);
-      if (error instanceof ZodError) {
-        return reply.code(400).send({ message: error });
+    } catch (err) {
+      reply.log.error(err);
+      if (err instanceof ZodError) {
+        return reply.code(400).send({ message: err });
       }
       return reply.code(500).send({ message: 'internal server error...' });
     }
@@ -51,8 +56,8 @@ async function routes(fastify: any) {
 
       reply.log.info('file uploaded successfully...');
       return reply.code(204).send();
-    } catch (error) {
-      reply.log.error(error);
+    } catch (err) {
+      reply.log.error(err);
       return reply.code(500).send({ message: 'internal server error...' });
     }
   });

@@ -7,4 +7,5 @@ export const vars = {
   DB_DATABASE: env.get('PG_DATABASE').required().asString(),
   DB_PORT: env.get('PG_PORT').required().asPortNumber(),
   API_PORT: env.get('API_PORT').required().asPortNumber(),
+  API_ENV: env.get('API_ENV').required().asString(),
 };

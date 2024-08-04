@@ -17,14 +17,9 @@ services:
   app:
     container_name: clark-mvp
     build: ./
-
+    env_file: ./.env
     environment:
       - PG_HOST=$PG_HOST_DOCKER
-      - PG_USER=$PG_USER
-      - PG_PASSWORD=$PG_PASSWORD
-      - PG_DATABASE=$PG_DATABASE
-      - PG_PORT=$PG_PORT
-      - API_PORT=$API_PORT
 
     ports:
       - 3000:3000
