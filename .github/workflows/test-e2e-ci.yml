@@ -35,12 +35,5 @@ jobs:
           PG_PORT: 5432
           API_PORT: 3000
 
-      - name: start containers
-        run: docker-compose up
-
       - name: run tests
-        run: pnpm run test:e2e
-
-      - name: stop containers
-        if: always()
-        run: docker-compose down
+        run: docker compose exec pnpm run test:e2e
