@@ -47,4 +47,4 @@ jobs:
           API_PORT: 3000
 
         run: |
-          docker-compose exec app pnpm run test:e2e:docker
+          docker-compose exec clark-mvp pnpm run test:e2e:docker
