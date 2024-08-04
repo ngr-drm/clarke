@@ -13,12 +13,14 @@ tap.test('smoke test', async (t) => {
     keepAliveMaxTimeout: 10,
   });
 
+  t.teardown(() => {
+    client.close();
+    fastify.close();
+  });
+
   const response = await client.request({ method: 'GET', path: '/health' });
   const body = (await response.body.json()) as JSON;
 
   t.hasOwnProp(body, 'api');
   t.equal(response.statusCode, 200);
-
-  client.close();
-  fastify.close();
 });
