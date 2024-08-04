@@ -7,16 +7,16 @@
 		"format": "pnpm biome format ./src",
 		"lint": "biome lint --error-on-warnings ./src",
 		"migrations": "node -r ts-node/register --env-file .env ./src/providers/pg-db/migrate.ts",
+		"migrations:docker": "node -r ts-node/register --env-file .env.docker ./src/providers/pg-db/migrate.ts",
 		"build": "tsc -b",
 		"build:watch": "tsc -w",
 		"dev:run": "npx nodemon --env-file .env dist/index.js",
 		"dev": "npx concurrently \"pnpm run build\" \"pnpm run dev:run\"",
 		"dev:watch": "npx concurrently \"pnpm run build:watch\" \"pnpm run dev:run\"",
 		"dev:docker": "npx concurrently \"pnpm run build\" \"npx nodemon --env-file .env.docker dist/index.js\"",
-		"migrations:docker": "node -r ts-node/register --env-file .env.docker ./src/providers/pg-db/migrate.ts",
-		"test:e2e:docker": "node -r ts-node/register --env-file .env.docker ./src/e2e-tests/http-spec.ts",
 		"test": "jest",
 		"test:e2e": "node -r ts-node/register --env-file .env ./src/e2e-tests/http-spec.ts",
+		"test:e2e:docker": "node -r ts-node/register --env-file .env.docker ./src/e2e-tests/http-spec.ts",
 		"start": "npx concurrently \"pnpm run build\" \"node --env-file .env dist/index.js\""
 	},
 	"volta": {
