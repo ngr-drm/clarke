@@ -8,7 +8,8 @@ then
   wait $PID
 
   echo "running local server..."
-  pnpm run dev:watch
+  pnpm run dev:watch & PID=$!
+  wait $PID
 
   echo "ENV: $API_ENV is up"
 fi
@@ -20,7 +21,8 @@ then
   wait $PID
 
   echo "running docker server..."
-  pnpm run dev:docker 
+  pnpm run dev:docker & PID=$!
+  wait $PID
 
   echo "ENV: $API_ENV is up"
 fi
@@ -32,7 +34,8 @@ then
   wait $PID
 
   echo "running sandbox server..."
-  pnpm run start 
+  pnpm run start & PID=$!
+  wait $PID
 
   echo "ENV: $API_ENV is up"
 fi
