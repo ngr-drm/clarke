@@ -46,4 +46,5 @@ jobs:
           PG_PORT: 5432
           API_PORT: 3000
 
-        run: docker-compose exec app pnpm run test:e2e:docker
+        run: |
+          docker-compose exec app pnpm run test:e2e:docker
