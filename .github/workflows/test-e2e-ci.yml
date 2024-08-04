@@ -19,12 +19,28 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
 
+      - name: setup docker
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: './docker-compose.yml'
+          up-flags: '-d --build'
+          down-flags: '-v'
+        env:
+          API_ENV: 'docker'
+          PG_HOST: 'db'
+          PG_USER: 'docker'
+          PG_PASSWORD: 'docker'
+          PG_DATABASE: 'docker'
+          PG_PORT: 5432
+          PG_DOCKER_PORT: 5432
+          API_PORT: 3000
+
       - name: start containers
-        run: docker-compose -f "docker-compose.yml" up -d --build
+        run: docker-compose up
 
       - name: run tests
         run: pnpm run test:e2e
 
       - name: stop containers
         if: always()
-        run: docker-compose -f "docker-compose.yml" down
+        run: docker-compose down
