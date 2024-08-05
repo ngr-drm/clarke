@@ -18,19 +18,3 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-
-      - name: containers setup test
-        uses: hoverkraft-tech/compose-action@v2.0.1
-        with:
-          compose-file: './docker-compose.yml'
-          up-flags: '-d --build'
-          down-flags: '-v'
-        env:
-          API_ENV: 'docker'
-          PG_HOST: 'localhost'
-          PG_HOST_DOCKER: 'db'
-          PG_USER: 'postgres'
-          PG_PASSWORD: 'docker'
-          PG_DATABASE: 'docker'
-          PG_PORT: 5432
-          API_PORT: 3000

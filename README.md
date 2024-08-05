@@ -2,7 +2,7 @@
 
 <h3>Motivação </h3>
 
-A solução foi inspirada no padrão de arquitetura de Microkernel e no paradigma funcional. A proposta visa segregar o domínio da aplicação das suas extensões (providers). Uma tentativa de estimular condições de modularidade, flexibilidade e extensibilidade.
+A solução foi inspirada em conceitos do Temporal e na arquitetura de Microkernel. A proposta visa segregar o domínio da aplicação das suas extensões (**_providers_**). Uma tentativa de estimular condições de modularidade, flexibilidade e extensibilidade.
 
 #
 
