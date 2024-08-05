@@ -4,15 +4,14 @@ echo "running migrations..."
 pnpm run migrations & PID=$!
 wait $PID
 
-echo "set enviroment..."
+echo "set enviroment: echo $API_ENV"
 
 if [ $API_ENV == "local" ] 
 then
-  echo "running local server..."
-  pnpm run dev:watch & PID=$!
+  pnpm run start & PID=$!
   wait $PID
 
-  echo "ENV: $API_ENV is up"
+  echo "local server is up"
 fi
 
 if [ $API_ENV == "sandbox" ] 
