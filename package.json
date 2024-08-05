@@ -7,7 +7,6 @@
 		"format": "pnpm biome format ./src",
 		"lint": "biome lint --error-on-warnings ./src",
 		"migrations": "node -r ts-node/register --env-file .env ./src/providers/pg-db/migrate.ts",
-		"migrations:docker": "node -r ts-node/register --env-file .env.docker ./src/providers/pg-db/migrate.ts",
 		"build": "tsc -b",
 		"build:watch": "tsc -w",
 		"dev:run": "npx nodemon --env-file .env dist/index.js",
