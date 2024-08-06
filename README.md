@@ -19,3 +19,15 @@ A solução foi inspirada em conceitos do Temporal e na arquitetura de Microkern
 ```zsh
   docker compose up -d --build
 ```
+
+<h3>Testes de integração</h3>
+
+Com servidor rodando execute o comando abaixo
+
+```zsh
+  $ pnpm run test:e2e
+```
+
+_Foi implementado apenas um teste de fumaça_
+
+#
