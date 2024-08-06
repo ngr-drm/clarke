@@ -9,13 +9,12 @@
 		"migrations": "node -r ts-node/register --env-file .env ./src/providers/pg-db/migrate.ts",
 		"build": "tsc -b",
 		"build:watch": "tsc -w",
-		"dev:run": "npx nodemon --env-file .env dist/index.js",
+		"dev:run": "npx nodemon --env-file dist/api.js",
 		"dev": "npx concurrently \"pnpm run build\" \"pnpm run dev:run\"",
 		"dev:watch": "npx concurrently \"pnpm run build:watch\" \"pnpm run dev:run\"",
 		"test": "jest",
 		"test:e2e": "node -r ts-node/register --env-file .env ./src/e2e-tests/http-spec.ts",
-		"sandbox:migrations": "node  dist/providers/pg-db/migrate.js",
-		"sandbox:run": "node dist/index.js"
+		"sandbox:run": "node dist/api.js"
 	},
 	"volta": {
 		"node": "20.16.0"

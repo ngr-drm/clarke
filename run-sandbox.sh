@@ -1,11 +1,7 @@
 #!/bin/bash
 
-echo "running build..."
-pnpm run build & PID=$!
-wait $PID
-
 echo "running migrations..."
-pnpm run sandbox:migrations & PID=$!
+pnpm run migrations & PID=$!
 wait $PID
 
 echo "running sandbox server..."
