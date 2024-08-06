@@ -14,8 +14,8 @@
 		"dev:watch": "npx concurrently \"pnpm run build:watch\" \"pnpm run dev:run\"",
 		"test": "jest",
 		"test:e2e": "node -r ts-node/register --env-file .env ./src/e2e-tests/http-spec.ts",
-		"sandbox:migrations": "node dist/src/providers/pg-db/migrate.js",
-		"sandbox:run": "node dist/api.js"
+		"sandbox:migrations": "node --env-file .env dist/src/providers/pg-db/migrate.js",
+		"sandbox:run": "node --env-file .env dist/api.js"
 	},
 	"volta": {
 		"node": "20.16.0"
