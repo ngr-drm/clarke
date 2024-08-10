@@ -16,10 +16,7 @@ jobs:
     name: test compose action
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20.16.0
-      - uses: ./
+      - uses: adambirds/docker-compose-action@v1.3.0
         with:
           compose-file: './docker-compose.ci.yml'
           test-container: app
