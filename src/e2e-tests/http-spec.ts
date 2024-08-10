@@ -1,26 +1,40 @@
+import supertest from 'supertest';
 import tap from 'tap';
-import { Client } from 'undici';
 import { server } from '../setup';
 
 tap.test('smoke test', async (t) => {
-  t.plan(2);
+  t.plan(1);
   const fastify = await server();
 
-  await fastify.listen();
+  t.teardown(() => fastify.close());
 
-  const client = new Client('http://127.0.0.1:3000', {
-    keepAliveTimeout: 10,
-    keepAliveMaxTimeout: 10,
-  });
+  await fastify.ready();
 
-  t.teardown(() => {
-    client.close();
-    fastify.close();
-  });
+  const response = await supertest(fastify.server).get('/health').expect(200).expect('Content-Type', 'application/json; charset=utf-8');
+  t.same(response.body, { api: 'running...' });
+});
 
-  const response = await client.request({ method: 'GET', path: '/health' });
-  const body = (await response.body.json()) as JSON;
+tap.test('should create a supplier', async (t) => {
+  t.plan(1);
+  const fastify = await server();
 
-  t.hasOwnProp(body, 'api');
-  t.equal(response.statusCode, 200);
+  t.teardown(() => fastify.close());
+
+  await fastify.ready();
+
+  const response = await supertest(fastify.server)
+    .post('/supplier/create')
+    .send({
+      name: 'coelba',
+      state: 'Bahia',
+      minimumKwh: 1000,
+      costPerKwh: 10.0,
+      totalCustomers: 100,
+      averageRating: 3,
+    })
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(201);
+
+  t.hasProp(response.body, 'id');
 });
