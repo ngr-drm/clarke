@@ -15,7 +15,9 @@
 		"test": "jest",
 		"test:e2e": "node -r ts-node/register --env-file .env ./src/e2e-tests/http-spec.ts",
 		"sandbox:migrations": "node --env-file .env dist/src/providers/pg-db/migrate.js",
-		"sandbox:run": "node --env-file .env dist/api.js"
+		"sandbox:run": "node --env-file .env dist/api.js",
+		"ci:migrations": "node dist/src/providers/pg-db/migrate.js",
+		"ci:run": "node dist/api.js"
 	},
 	"volta": {
 		"node": "20.16.0"

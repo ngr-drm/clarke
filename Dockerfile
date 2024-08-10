@@ -14,4 +14,4 @@ RUN pnpm i
 ADD . /src
 
 
-CMD ["sh", "run-local.sh"]
+CMD ["sh", "run-ci.sh"]
